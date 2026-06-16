@@ -151,7 +151,7 @@
   .submit-wish-btn { background: var(--blue-deep); color: var(--cream); border: none; padding: 14px; border-radius: 999px; font-family: inherit; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 10px; }
   .submit-wish-btn:hover { background: var(--ink); transform: translateY(-1px); }
   
-  .wishes-display-area { margin-top: 48px; max-height: 280px; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 16px; scrollbar-width: thin; }
+  .wishes-display-area { margin-top: 48px; max-height: 320px; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 16px; scrollbar-width: thin; }
   .wishes-display-area::-webkit-scrollbar { width: 4px; }
   .wishes-display-area::-webkit-scrollbar-thumb { background: var(--blue-dust); border-radius: 2px; }
   .wish-item { background: var(--cream); border-left: 2px solid var(--gold); padding: 16px; border-radius: 0 8px 8px 0; text-align: left; animation: fadeInItem 0.5s ease both; }
@@ -276,14 +276,12 @@
       </div>
       <div class="slider-container" id="sliderContainer">
         <div class="slider-track" id="sliderTrack">
-          <!-- 6 ảnh cũ -->
           <div class="slider-item"><img src="img/VID06567.jpg" alt="Ảnh cưới 1"></div>
           <div class="slider-item"><img src="img/VID06337.jpg" alt="Ảnh cưới 2"></div>
           <div class="slider-item"><img src="img/VID06968.jpg" alt="Ảnh cưới 3"></div>
           <div class="slider-item"><img src="img/VID07110.jpg" alt="Ảnh cưới 4"></div>
           <div class="slider-item"><img src="img/VID07602.jpg" alt="Ảnh cưới 5"></div>
           <div class="slider-item"><img src="img/VID07686.jpg" alt="Ảnh cưới 6"></div>
-          <!-- 6 ảnh mới thêm -->
           <div class="slider-item"><img src="img/VID07487.jpg" alt="Ảnh cưới 7"></div>
           <div class="slider-item"><img src="img/VID07617.jpg" alt="Ảnh cưới 8"></div>
           <div class="slider-item"><img src="img/VID06889.jpg" alt="Ảnh cưới 9"></div>
@@ -313,7 +311,9 @@
           </div>
           <button type="submit" class="submit-wish-btn">Gửi lời chúc mừng</button>
         </form>
-        <div class="wishes-display-area" id="wishesArea"></div>
+        <div class="wishes-display-area" id="wishesArea">
+          <div style="text-align: center; padding: 20px; opacity: 0.6; font-size: 0.85rem;">Đang tải những lời chúc thương yêu...</div>
+        </div>
       </div>
     </section>
 
@@ -381,17 +381,17 @@
     const mainContent = document.getElementById('mainContent');
     const scrollCue = document.getElementById('scrollCue');
 
-    // ĐÃ ĐIỀN ĐÚNG LINK FORM GỐC CHÍNH CHỦ CỦA BẠN ĐỂ GỬI NGẦM
+    // =========================================================================
+    // HỆ THỐNG ĐƯỜNG DẪN DỮ LIỆU ĐÃ ĐƯỢC ĐỒNG BỘ CHUẨN XÁC
+    // =========================================================================
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1t6Z4cd0WxJAkfzyVLkiCD4iULjYPi1Sa-TYh_w8DQvVFKg/formResponse";
     const ENTRY_NAME = "entry.1398730456";
     const ENTRY_MESSAGE = "entry.1983245080";
+    const GOOGLE_SHEET_ID = "1evdO1ZeXVU9CILL74ErHLnVzva32bTSR10fHVuyrZMQ"; // Đã tích hợp thành công ID Excel chính chủ của hai bạn
 
-    // Khởi tạo khung iframe trung gian ẩn
+    // Tạo bưu tá ngầm iframe ẩn điều hướng formResponse
     const hiddenIframe = document.createElement('iframe');
-    hiddenIframe.name = 'hidden_iframe';
-    hiddenIframe.id = 'hidden_iframe';
-    hiddenIframe.style.display = 'none';
-    document.body.appendChild(hiddenIframe);
+    hiddenIframe.name = 'hidden_iframe'; hiddenIframe.id = 'hidden_iframe'; hiddenIframe.style.display = 'none'; document.body.appendChild(hiddenIframe);
 
     if(enterBtn){
       enterBtn.addEventListener('click', async () => {
@@ -400,9 +400,7 @@
           await bgMusic.play();
           let v = 0;
           const fade = setInterval(()=>{
-            v += 0.05;
-            bgMusic.volume = Math.min(v,1);
-            if(v >= 1) clearInterval(fade);
+            v += 0.05; bgMusic.volume = Math.min(v,1); if(v >= 1) clearInterval(fade);
           },150);
         }catch(e){}
 
@@ -413,7 +411,7 @@
 
         initIntersectionObserver();
         initLoopSlider();
-        loadStoredWishes();
+        fetchWishesFromExcel(); 
 
         setTimeout(() => {
           window.scrollBy({ top: window.innerHeight * 0.3, behavior: 'smooth' });
@@ -424,11 +422,7 @@
     function splitText(el, text, baseDelay){
       let i = 0;
       [...text].forEach(ch=>{
-        const span = document.createElement('span');
-        span.textContent = ch === ' ' ? '\u00A0' : ch;
-        span.style.animationDelay = (baseDelay + i*0.04) + 's';
-        el.appendChild(span);
-        i++;
+        const span = document.createElement('span'); span.textContent = ch === ' ' ? '\u00A0' : ch; span.style.animationDelay = (baseDelay + i*0.04) + 's'; el.appendChild(span); i++;
       });
     }
     splitText(document.getElementById('line1'), 'Tường Huy', 0.3);
@@ -458,22 +452,15 @@
       const container = document.getElementById('sliderContainer');
       const track = document.getElementById('sliderTrack');
       const originalItems = Array.from(track.children);
-      
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
-
       const itemWidth = originalItems[0].offsetWidth + 20;
       const totalOriginalWidth = itemWidth * originalItems.length;
       container.scrollLeft = totalOriginalWidth;
-
       container.addEventListener('scroll', () => {
-        if (container.scrollLeft >= totalOriginalWidth * 2) {
-          container.scrollLeft -= totalOriginalWidth;
-        } else if (container.scrollLeft <= 0) {
-          container.scrollLeft += totalOriginalWidth;
-        }
+        if (container.scrollLeft >= totalOriginalWidth * 2) container.scrollLeft -= totalOriginalWidth;
+        else if (container.scrollLeft <= 0) container.scrollLeft += totalOriginalWidth;
       });
-
       let isDown = false, startX, scrollLeft;
       container.addEventListener('mousedown', (e) => { isDown = true; container.style.cursor = 'grabbing'; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; });
       container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
@@ -481,28 +468,56 @@
       container.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 1.5; container.scrollLeft = scrollLeft - walk; });
     }
 
-    // HIỂN THỊ LỜI CHÚC MẪU BAN ĐẦU
+    // ĐỌC DỮ LIỆU TỪ GOOGLE EXCEL (REAL-TIME FETCH)
     const wishForm = document.getElementById('wishForm');
     const wishesArea = document.getElementById('wishesArea');
 
-    function loadStoredWishes() {
-      const stored = localStorage.getItem('wedding_wishes');
-      const wishes = stored ? JSON.parse(stored) : [
+    function fetchWishesFromExcel() {
+      const defaultWishes = [
         { name: "Gia đình anh chị Đức", text: "Chúc mừng hạnh phúc hai em! Chúc hai em trăm năm tình viên mãn, bạc đầu nghĩa phu thê!" },
         { name: "Bạn Minh Thảo", text: "Siêu vui khi nhận được thiệp báo hỷ của Huy và Huyền. Chúc hai bạn hành trình mới tràn ngập tiếng cười nhé!" }
       ];
-      wishesArea.innerHTML = "";
-      wishes.forEach(w => appendWishDOM(w.name, w.text));
+
+      const readUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
+
+      fetch(readUrl)
+        .then(res => res.text())
+        .then(data => {
+          const cleanJson = JSON.parse(data.substr(47).slice(0, -2));
+          const rows = cleanJson.table.rows;
+          
+          wishesArea.innerHTML = ""; 
+
+          let hasData = false;
+          for (let i = rows.length - 1; i >= 0; i--) {
+            const rowValue = rows[i].c;
+            if (rowValue && rowValue[1] && rowValue[2]) {
+              const name = rowValue[1].v;
+              const text = rowValue[2].v;
+              appendWishDOM(name, text);
+              hasData = true;
+            }
+          }
+
+          if (!hasData) {
+            defaultWishes.forEach(w => appendWishDOM(w.name, w.text));
+          }
+        })
+        .catch(err => {
+          console.error("Lỗi đọc Excel:", err);
+          wishesArea.innerHTML = "";
+          defaultWishes.forEach(w => appendWishDOM(w.name, w.text));
+        });
     }
 
     function appendWishDOM(name, text) {
       const item = document.createElement('div');
       item.className = 'wish-item';
       item.innerHTML = `<div class="wish-item-name">${name}</div><div class="wish-item-text">${text}</div>`;
-      wishesArea.insertBefore(item, wishesArea.firstChild);
+      wishesArea.appendChild(item);
     }
 
-    // BẮN FORM QUA IFRAME CHỐNG CHẶN BẢO MẬT
+    // GỬI CHÚC PHÚC ĐỒNG BỘ
     wishForm.addEventListener('submit', (e) => {
       wishForm.action = GOOGLE_FORM_URL;
       wishForm.method = "POST";
@@ -520,13 +535,11 @@
       btnSubmit.style.opacity = "0.7";
 
       setTimeout(() => {
-        const stored = localStorage.getItem('wedding_wishes');
-        const wishes = stored ? JSON.parse(stored) : [];
-        wishes.push({ name: nameValue, text: messageValue });
-        localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
-        
-        appendWishDOM(nameValue, messageValue);
-        
+        const item = document.createElement('div');
+        item.className = 'wish-item';
+        item.innerHTML = `<div class="wish-item-name">${nameValue}</div><div class="wish-item-text">${messageValue}</div>`;
+        wishesArea.insertBefore(item, wishesArea.firstChild);
+
         btnSubmit.textContent = "✓ Đã gửi lời chúc thành công!";
         btnSubmit.style.background = "var(--gold)";
         
@@ -537,6 +550,8 @@
           btnSubmit.style.opacity = "1";
           nameInput.value = "";
           messageInput.value = "";
+          
+          setTimeout(fetchWishesFromExcel, 3000);
         }, 2000);
         
         wishesArea.scrollTop = 0;
