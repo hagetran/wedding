@@ -211,7 +211,7 @@
 
   <!-- NỘI DUNG CHÍNH -->
   <div id="mainContent">
-    <!-- MESSAGE (CẬP NHẬT BẢN DỊCH TIẾNG ANH ĐẸP NHẤT) -->
+    <!-- MESSAGE -->
     <section class="reveal">
       <div class="section-head">
         <div class="eyebrow">Lời ngỏ</div>
@@ -221,7 +221,7 @@
       <div class="message-verse">
         <span class="verse-ref">1 Corinthians 13:4–8</span>
         <p class="verse-text">
-          "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs. Love does not delight in evil but rejoices with the truth. It always protects, always trusts, always hopes, always perseveres. Love never fails."
+          "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs. Love does not delight in evil but rejoices with the truth. It always protects, always trusts, always hopes, always preserves. Love never fails."
         </p>
       </div>
       <p class="message-body">
@@ -267,7 +267,7 @@
       </div>
     </section>
 
-    <!-- GALLERY (ĐÃ THÊM ĐỦ 12 ẢNH VÀ CHUYỂN THÀNH LOOP SLIDER) -->
+    <!-- GALLERY -->
     <section class="gallery-section reveal">
       <div class="section-head">
         <div class="eyebrow">Album</div>
@@ -276,15 +276,15 @@
       </div>
       <div class="slider-container" id="sliderContainer">
         <div class="slider-track" id="sliderTrack">
-          <!-- 6 ảnh đầu -->
+          <!-- 6 ảnh cũ -->
           <div class="slider-item"><img src="img/VID06567.jpg" alt="Ảnh cưới 1"></div>
           <div class="slider-item"><img src="img/VID06337.jpg" alt="Ảnh cưới 2"></div>
           <div class="slider-item"><img src="img/VID06968.jpg" alt="Ảnh cưới 3"></div>
           <div class="slider-item"><img src="img/VID07110.jpg" alt="Ảnh cưới 4"></div>
           <div class="slider-item"><img src="img/VID07602.jpg" alt="Ảnh cưới 5"></div>
           <div class="slider-item"><img src="img/VID07686.jpg" alt="Ảnh cưới 6"></div>
-          <!-- 6 ảnh mới thêm vào -->
-          <div class="slider-item"><img src="img/VID07523.jpg" alt="Ảnh cưới 7"></div>
+          <!-- 6 ảnh mới thêm -->
+          <div class="slider-item"><img src="img/VID07487.jpg" alt="Ảnh cưới 7"></div>
           <div class="slider-item"><img src="img/VID07617.jpg" alt="Ảnh cưới 8"></div>
           <div class="slider-item"><img src="img/VID06889.jpg" alt="Ảnh cưới 9"></div>
           <div class="slider-item"><img src="img/VID07183.jpg" alt="Ảnh cưới 10"></div>
@@ -294,7 +294,7 @@
       </div>
     </section>
 
-    <!-- WISHBOOK (HỆ THỐNG LƯU LỜI CHÚC) -->
+    <!-- WISHBOOK -->
     <section class="reveal">
       <div class="section-head">
         <div class="eyebrow">Wishbook</div>
@@ -305,21 +305,19 @@
         <form class="wish-form" id="wishForm">
           <div class="form-group">
             <label for="guestName">Tên của bạn</label>
-            <input type="text" id="guestName" placeholder="Nhập tên của bạn..." required>
+            <input type="text" id="guestName" name="entry.1398730456" placeholder="Nhập tên của bạn..." required>
           </div>
           <div class="form-group">
             <label for="guestMessage">Lời chúc mừng</label>
-            <textarea id="guestMessage" rows="4" placeholder="Nhập lời chúc ý nghĩa của bạn gửi tới cô dâu & chú rể..." required></textarea>
+            <textarea id="guestMessage" name="entry.1983245080" rows="4" placeholder="Nhập lời chúc ý nghĩa của bạn gửi tới cô dâu & chú rể..." required></textarea>
           </div>
           <button type="submit" class="submit-wish-btn">Gửi lời chúc mừng</button>
         </form>
-        <div class="wishes-display-area" id="wishesArea">
-          <!-- LLời chúc sẽ tự động hiển thị ở đây từ LocalStorage -->
-        </div>
+        <div class="wishes-display-area" id="wishesArea"></div>
       </div>
     </section>
 
-    <!-- FOOTER (ĐÃ SỬA LỜI CẢM ƠN THÂN MẬT) -->
+    <!-- FOOTER -->
     <footer>
       <div class="monogram"><span>H&amp;H</span></div>
       <p class="footer-date">20 . 6 . 2026 — TP. Hồ Chí Minh</p>
@@ -383,6 +381,18 @@
     const mainContent = document.getElementById('mainContent');
     const scrollCue = document.getElementById('scrollCue');
 
+    // ĐÃ ĐIỀN ĐÚNG LINK FORM GỐC CHÍNH CHỦ CỦA BẠN ĐỂ GỬI NGẦM
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1t6Z4cd0WxJAkfzyVLkiCD4iULjYPi1Sa-TYh_w8DQvVFKg/formResponse";
+    const ENTRY_NAME = "entry.1398730456";
+    const ENTRY_MESSAGE = "entry.1983245080";
+
+    // Khởi tạo khung iframe trung gian ẩn
+    const hiddenIframe = document.createElement('iframe');
+    hiddenIframe.name = 'hidden_iframe';
+    hiddenIframe.id = 'hidden_iframe';
+    hiddenIframe.style.display = 'none';
+    document.body.appendChild(hiddenIframe);
+
     if(enterBtn){
       enterBtn.addEventListener('click', async () => {
         try{
@@ -443,22 +453,19 @@
       reveals.forEach(el=>obs.observe(el));
     }
 
-    // TÍNH NĂNG SLIDER LƯỚT VÒNG LẶP VÔ TẬN (INFINITE SCROLL SLIDER)
+    // SLIDER LƯỚT VÒNG LẶP VÔ TẬN
     function initLoopSlider() {
       const container = document.getElementById('sliderContainer');
       const track = document.getElementById('sliderTrack');
       const originalItems = Array.from(track.children);
       
-      // Nhân bản chuỗi ảnh để tạo hiệu ứng nối đuôi vòng lặp vô tận mượt mà
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
 
-      // Định vị trí ban đầu ở giữa chuỗi ảnh nhân bản
       const itemWidth = originalItems[0].offsetWidth + 20;
       const totalOriginalWidth = itemWidth * originalItems.length;
       container.scrollLeft = totalOriginalWidth;
 
-      // Xử lý sự kiện dịch chuyển vòng lặp tự động khi cuộn chạm biên
       container.addEventListener('scroll', () => {
         if (container.scrollLeft >= totalOriginalWidth * 2) {
           container.scrollLeft -= totalOriginalWidth;
@@ -467,7 +474,6 @@
         }
       });
 
-      // Hỗ trợ tính năng kéo chuột/vuốt màn hình thủ công mượt mà
       let isDown = false, startX, scrollLeft;
       container.addEventListener('mousedown', (e) => { isDown = true; container.style.cursor = 'grabbing'; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; });
       container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
@@ -475,7 +481,7 @@
       container.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 1.5; container.scrollLeft = scrollLeft - walk; });
     }
 
-    // TÍNH NĂNG XỬ LÝ LỜI CHÚC (LOCAL STORAGE WISHBOOK)
+    // HIỂN THỊ LỜI CHÚC MẪU BAN ĐẦU
     const wishForm = document.getElementById('wishForm');
     const wishesArea = document.getElementById('wishesArea');
 
@@ -496,29 +502,48 @@
       wishesArea.insertBefore(item, wishesArea.firstChild);
     }
 
+    // BẮN FORM QUA IFRAME CHỐNG CHẶN BẢO MẬT
     wishForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+      wishForm.action = GOOGLE_FORM_URL;
+      wishForm.method = "POST";
+      wishForm.target = "hidden_iframe";
+
       const nameInput = document.getElementById('guestName');
       const messageInput = document.getElementById('guestMessage');
+      const btnSubmit = wishForm.querySelector('.submit-wish-btn');
       
-      const newWish = { name: nameInput.value.trim(), text: messageInput.value.trim() };
-      
-      // Lưu vào LocalStorage của thiết bị
-      const stored = localStorage.getItem('wedding_wishes');
-      const wishes = stored ? JSON.parse(stored) : [];
-      wishes.push(newWish);
-      localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
-      
-      // Hiển thị trực tiếp lên giao diện ngay lập tức
-      appendWishDOM(newWish.name, newWish.text);
-      
-      // Reset form dữ liệu
-      nameInput.value = "";
-      messageInput.value = "";
-      wishesArea.scrollTop = 0;
+      const nameValue = nameInput.value.trim();
+      const messageValue = messageInput.value.trim();
+
+      btnSubmit.textContent = "Đang gửi lời chúc...";
+      btnSubmit.style.pointerEvents = "none";
+      btnSubmit.style.opacity = "0.7";
+
+      setTimeout(() => {
+        const stored = localStorage.getItem('wedding_wishes');
+        const wishes = stored ? JSON.parse(stored) : [];
+        wishes.push({ name: nameValue, text: messageValue });
+        localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+        
+        appendWishDOM(nameValue, messageValue);
+        
+        btnSubmit.textContent = "✓ Đã gửi lời chúc thành công!";
+        btnSubmit.style.background = "var(--gold)";
+        
+        setTimeout(() => {
+          btnSubmit.textContent = "Gửi lời chúc mừng";
+          btnSubmit.style.background = "var(--blue-deep)";
+          btnSubmit.style.pointerEvents = "auto";
+          btnSubmit.style.opacity = "1";
+          nameInput.value = "";
+          messageInput.value = "";
+        }, 2000);
+        
+        wishesArea.scrollTop = 0;
+      }, 300);
     });
 
-    // Quản lý Modal STK
+    // Modals
     function openModal(person) {
       if(person === 'groom') document.getElementById('modalGroom').classList.add('show');
       else if(person === 'bride') document.getElementById('modalBride').classList.add('show');
