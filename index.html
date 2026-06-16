@@ -677,18 +677,66 @@
   /* ---------- FOOTER ---------- */
   footer{
     text-align:center;
-    padding:64px 24px 48px;
+    padding:80px 24px 64px;
+    background: linear-gradient(to bottom, var(--cream), var(--cream-soft));
+    border-top:1px solid var(--line);
   }
   footer .monogram{
-    width:64px; height:64px; margin:0 auto 20px;
+    width:64px; height:64px; margin:0 auto 24px;
     animation:none; opacity:1;
   }
   footer .monogram span{ font-size:1.4rem; }
-  footer p{
-    font-size:0.78rem;
-    letter-spacing:0.3em;
+  .footer-date{
+    font-size:0.75rem;
+    letter-spacing:0.35em;
     text-transform:uppercase;
     color:var(--blue-deep);
+    margin-bottom:48px;
+  }
+  .footer-message{
+    max-width:480px;
+    margin:0 auto 48px;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .footer-thanks{
+    font-family:'Be Vietnam Pro', sans-serif;
+    font-size:0.9rem;
+    font-weight:300;
+    line-height:1.9;
+    letter-spacing:0.04em;
+    color:var(--ink);
+    opacity:0.65;
+  }
+  .footer-wish{
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    line-height:1.9;
+    color:var(--ink);
+    opacity:0.8;
+  }
+  .footer-promise{
+    font-family:'Playfair Display', serif;
+    font-size:1.1rem;
+    line-height:1.9;
+    color:var(--ink);
+  }
+  .footer-promise em{
+    color:var(--blue-deep);
+    font-style:italic;
+  }
+  .footer-sig{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--blue-deep);
+    letter-spacing:0.05em;
+    padding-top:36px;
+    border-top:1px solid var(--line);
+    max-width:200px;
+    margin:0 auto;
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -838,7 +886,27 @@
 
   <footer>
     <div class="monogram"><span>H&amp;H</span></div>
-    <p>20 . 6 . 2026 — TP. Hồ Chí Minh</p>
+
+    <p class="footer-date">20 . 6 . 2026 — TP. Hồ Chí Minh</p>
+
+    <div class="footer-message">
+      <p class="footer-thanks">
+        Cảm ơn bạn đã dành chút thời gian<br>
+        ghé thăm trang nhỏ này của chúng tôi.
+      </p>
+      <p class="footer-wish">
+        Dù bận rộn hay cách xa,<br>
+        chúng tôi hiểu và luôn trân trọng<br>
+        tấm lòng của bạn dành cho chúng tôi.
+      </p>
+      <p class="footer-promise">
+        Khi có dịp gặp nhau,<br>
+        hãy để chúng tôi được mời bạn một bữa tối —<br>
+        <em>chậm rãi, ấm áp, và đủ đầy.</em>
+      </p>
+    </div>
+
+    <div class="footer-sig">Tường Huy &amp; Thanh Huyền</div>
   </footer>
 
   <script>
