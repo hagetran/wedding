@@ -131,15 +131,29 @@
   .copy-btn:hover{ background:var(--blue-deep); color:var(--cream); }
   .copy-btn.copied{ background:var(--gold); border-color:var(--gold); color:#fff; }
 
-  /* ---------- ALBUM ẢNH (LOOP SLIDER) ---------- */
+  /* ---------- ALBUM ẢNH (PHÓNG TO TẤM CENTER CHUYÊN NGHIỆP) ---------- */
   .gallery-section { max-width: 100% !important; padding: 120px 0 !important; overflow: hidden; position: relative; }
-  .slider-container { width: 100%; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; padding: 20px 0; }
+  .slider-container { width: 100%; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; padding: 40px 0; }
   .slider-container::-webkit-scrollbar { display: none; }
-  .slider-track { display: flex; gap: 20px; padding: 0 40px; }
-  .slider-item { flex: 0 0 280px; width: 280px; aspect-ratio: 3/4; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--cream-soft); box-shadow: 0 10px 25px -10px rgba(139,111,94,0.15); transition: transform 0.4s ease; scroll-snap-align: center; }
-  .slider-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.95); transition: transform 0.6s ease; pointer-events: none; }
-  .slider-item:hover img { transform: scale(1.06); }
-  @media(max-width: 640px) { .slider-item { flex: 0 0 240px; width: 240px; } }
+  .slider-track { display: flex; gap: 24px; padding: 0 50vw; }
+  
+  .slider-item { 
+    flex: 0 0 280px; width: 280px; aspect-ratio: 3/4; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--cream-soft); 
+    box-shadow: 0 10px 25px -10px rgba(139,111,94,0.12); 
+    transform: scale(0.85); opacity: 0.6; 
+    transition: transform 0.5s cubic-bezier(.22,1,.36,1), opacity 0.5s ease, box-shadow 0.5s ease; 
+    scroll-snap-align: center; 
+  }
+  .slider-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92); pointer-events: none; }
+  
+  .slider-item.active {
+    transform: scale(1.08); 
+    opacity: 1; 
+    box-shadow: 0 20px 45px -12px rgba(139,111,94,0.35); 
+    border-color: var(--gold);
+  }
+  .slider-item.active img { filter: saturate(1.02); }
+  @media(max-width: 640px) { .slider-item { flex: 0 0 230px; width: 230px; } }
 
   /* ---------- LỜI CHÚC (WISHBOOK) ---------- */
   .wish-container { max-width: 600px; margin: 0 auto; background: var(--cream-soft); border: 1px solid var(--line); border-radius: 12px; padding: 40px 30px; box-shadow: 0 10px 30px rgba(139,111,94,0.05); }
@@ -173,7 +187,9 @@
 
   #heroOverlay{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center; z-index:20;background:rgba(250,245,238,.15);backdrop-filter:blur(2px); transition:opacity .8s ease, transform 0.8s ease; }
   #heroOverlay.hide{opacity:0;pointer-events:none;transform:translateY(-20px);}
-  #enterInvitation{ border:none;background:rgba(255,255,255,.90); padding:16px 36px;border-radius:999px;color:var(--blue-deep); font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;cursor:pointer; font-weight: 400; letter-spacing: 0.05em; box-shadow:0 10px 30px rgba(139,111,94,0.2);transition:transform .25s ease, background-color .25s ease; }
+  
+  /* Cập nhật padding nút mở rộng cho cân đối sau khi xóa chữ */
+  #enterInvitation{ border:none;background:rgba(255,255,255,.90); padding:16px 40px;border-radius:999px;color:var(--blue-deep); font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;cursor:pointer; font-weight: 400; letter-spacing: 0.05em; box-shadow:0 10px 30px rgba(139,111,94,0.2);transition:transform .25s ease, background-color .25s ease; }
   #enterInvitation:hover{transform:translateY(-2px); background:#fff;}
 
   #mainContent { display: none; }
@@ -188,10 +204,10 @@
 
 <audio id="bgMusic" src="Quiet Room.mp3" loop></audio>
 
-  <!-- HERO -->
+  <!-- HERO (ĐÃ XÓA CHỮ "BÁO HỶ") -->
   <section class="hero" id="hero" style="min-height:100vh; padding-top:0;">
     <div id="heroOverlay">
-      <button id="enterInvitation">🤍 Chạm để mở thiệp báo hỷ</button>
+      <button id="enterInvitation">🤍 Chạm để mở thiệp</button>
     </div>
     <div class="hero-glow" id="heroGlow"></div>
     <div id="petals"></div>
@@ -211,7 +227,7 @@
 
   <!-- NỘI DUNG CHÍNH -->
   <div id="mainContent">
-    <!-- MESSAGE -->
+    <!-- MESSAGE (VĂN PHONG TINH GỌN, TRANG NHÃ) -->
     <section class="reveal">
       <div class="section-head">
         <div class="eyebrow">Lời ngỏ</div>
@@ -231,7 +247,7 @@
         <span class="note">
           Vì hoàn cảnh và khoảng cách, chúng con không thể đến tận nơi<br>
           để gửi lời mời trực tiếp đến từng người.<br>
-          Kính mong gia đình và mọi người đón nhận lời báo tin này<br>
+          Kính mong gia đình, người thân và bạn bè đón nhận lời báo tin này<br>
           như một lời chúc phúc và tình cảm chân thành mà chúng con muốn gửi đến.
         </span>
       </p>
@@ -322,19 +338,19 @@
       <div class="monogram"><span>H&amp;H</span></div>
       <p class="footer-date">20 . 6 . 2026 — TP. Hồ Chí Minh</p>
       <div class="footer-message">
-     <p class="footer-thanks">
-  Cảm ơn bạn đã dành thời gian ghé thăm trang nhỏ này,<br>
-  để cùng chúng mình chia sẻ niềm vui trong những ngày đặc biệt.
-</p>
-<p class="footer-wish">
-  Tụi mình hiểu rằng dù không thể gặp mặt trực tiếp,<br>
-  nhưng tình cảm và những lời chúc phúc từ xa<br>
-  đều là những món quà vô giá.
-</p>
-<p class="footer-promise">
-  Một ngày gần nhất khi tụi mình gặp nhau,<br>
-  nhất định phải cùng ngồi lại bên một bữa tối thật trọn vẹn —<br>
-  <em>thật gần, thật ấm và ngập tràn tiếng cười.</em>
+        <p class="footer-thanks">
+          Cảm ơn bạn đã dành thời gian ghé thăm trang nhỏ này,<br>
+          để cùng chúng mình chia sẻ niềm vui trong những ngày đặc biệt.
+        </p>
+        <p class="footer-wish">
+          Tụi mình hiểu rằng dù không thể gặp mặt trực tiếp,<br>
+          nhưng tình cảm và những lời chúc phúc từ xa<br>
+          đều là những món quà vô giá.
+        </p>
+        <p class="footer-promise">
+          Một ngày gần nhất khi tụi mình gặp nhau,<br>
+          nhất định phải cùng ngồi lại bên một bữa tối thật trọn vẹn —<br>
+          <em>thật gần, thật ấm và ngập tràn tiếng cười.</em>
         </p>
       </div>
       <div class="footer-sig">Tường Huy &amp; Thanh Huyền</div>
@@ -381,15 +397,11 @@
     const mainContent = document.getElementById('mainContent');
     const scrollCue = document.getElementById('scrollCue');
 
-    // =========================================================================
-    // HỆ THỐNG ĐƯỜNG DẪN DỮ LIỆU ĐÃ ĐƯỢC ĐỒNG BỘ CHUẨN XÁC
-    // =========================================================================
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1t6Z4cd0WxJAkfzyVLkiCD4iULjYPi1Sa-TYh_w8DQvVFKg/formResponse";
     const ENTRY_NAME = "entry.1398730456";
     const ENTRY_MESSAGE = "entry.1983245080";
-    const GOOGLE_SHEET_ID = "1evdO1ZeXVU9CILL74ErHLnVzva32bTSR10fHVuyrZMQ"; // Đã tích hợp thành công ID Excel chính chủ của hai bạn
+    const GOOGLE_SHEET_ID = "1evdO1ZeXVU9CILL74ErHLnVzva32bTSR10fHVuyrZMQ";
 
-    // Tạo bưu tá ngầm iframe ẩn điều hướng formResponse
     const hiddenIframe = document.createElement('iframe');
     hiddenIframe.name = 'hidden_iframe'; hiddenIframe.id = 'hidden_iframe'; hiddenIframe.style.display = 'none'; document.body.appendChild(hiddenIframe);
 
@@ -447,20 +459,51 @@
       reveals.forEach(el=>obs.observe(el));
     }
 
-    // SLIDER LƯỚT VÒNG LẶP VÔ TẬN
+    // SYSTEM SLIDER LOOP VÔ TẬN + CENTER SCALE FOCUS
     function initLoopSlider() {
       const container = document.getElementById('sliderContainer');
       const track = document.getElementById('sliderTrack');
       const originalItems = Array.from(track.children);
+      
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
       originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
-      const itemWidth = originalItems[0].offsetWidth + 20;
+
+      const itemWidth = originalItems[0].offsetWidth + 24; 
       const totalOriginalWidth = itemWidth * originalItems.length;
+      
       container.scrollLeft = totalOriginalWidth;
+
+      function updateCenterFocus() {
+        const containerCenter = container.getBoundingClientRect().left + container.offsetWidth / 2;
+        const items = track.querySelectorAll('.slider-item');
+        
+        let closestItem = null;
+        let minDistance = Infinity;
+
+        items.forEach(item => {
+          const itemCenter = item.getBoundingClientRect().left + item.offsetWidth / 2;
+          const distance = Math.abs(containerCenter - itemCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestItem = item;
+          }
+        });
+
+        items.forEach(item => item.classList.remove('active'));
+        if (closestItem) closestItem.classList.add('active');
+      }
+
       container.addEventListener('scroll', () => {
-        if (container.scrollLeft >= totalOriginalWidth * 2) container.scrollLeft -= totalOriginalWidth;
-        else if (container.scrollLeft <= 0) container.scrollLeft += totalOriginalWidth;
+        if (container.scrollLeft >= totalOriginalWidth * 2) {
+          container.scrollLeft -= totalOriginalWidth;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += totalOriginalWidth;
+        }
+        updateCenterFocus();
       });
+
+      setTimeout(updateCenterFocus, 100);
+
       let isDown = false, startX, scrollLeft;
       container.addEventListener('mousedown', (e) => { isDown = true; container.style.cursor = 'grabbing'; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; });
       container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
@@ -485,23 +528,17 @@
         .then(data => {
           const cleanJson = JSON.parse(data.substr(47).slice(0, -2));
           const rows = cleanJson.table.rows;
-          
           wishesArea.innerHTML = ""; 
 
           let hasData = false;
           for (let i = rows.length - 1; i >= 0; i--) {
             const rowValue = rows[i].c;
             if (rowValue && rowValue[1] && rowValue[2]) {
-              const name = rowValue[1].v;
-              const text = rowValue[2].v;
-              appendWishDOM(name, text);
+              appendWishDOM(rowValue[1].v, rowValue[2].v);
               hasData = true;
             }
           }
-
-          if (!hasData) {
-            defaultWishes.forEach(w => appendWishDOM(w.name, w.text));
-          }
+          if (!hasData) defaultWishes.forEach(w => appendWishDOM(w.name, w.text));
         })
         .catch(err => {
           console.error("Lỗi đọc Excel:", err);
@@ -511,54 +548,39 @@
     }
 
     function appendWishDOM(name, text) {
-      const item = document.createElement('div');
-      item.className = 'wish-item';
+      const item = document.createElement('div'); item.className = 'wish-item';
       item.innerHTML = `<div class="wish-item-name">${name}</div><div class="wish-item-text">${text}</div>`;
       wishesArea.appendChild(item);
     }
 
     // GỬI CHÚC PHÚC ĐỒNG BỘ
     wishForm.addEventListener('submit', (e) => {
-      wishForm.action = GOOGLE_FORM_URL;
-      wishForm.method = "POST";
-      wishForm.target = "hidden_iframe";
+      wishForm.action = GOOGLE_FORM_URL; wishForm.method = "POST"; wishForm.target = "hidden_iframe";
 
       const nameInput = document.getElementById('guestName');
       const messageInput = document.getElementById('guestMessage');
       const btnSubmit = wishForm.querySelector('.submit-wish-btn');
-      
-      const nameValue = nameInput.value.trim();
-      const messageValue = messageInput.value.trim();
+      const nameValue = nameInput.value.trim(); const messageValue = messageInput.value.trim();
 
-      btnSubmit.textContent = "Đang gửi lời chúc...";
-      btnSubmit.style.pointerEvents = "none";
-      btnSubmit.style.opacity = "0.7";
+      btnSubmit.textContent = "Đang gửi lời chúc..."; btnSubmit.style.pointerEvents = "none"; btnSubmit.style.opacity = "0.7";
 
       setTimeout(() => {
-        const item = document.createElement('div');
-        item.className = 'wish-item';
+        const item = document.createElement('div'); item.className = 'wish-item';
         item.innerHTML = `<div class="wish-item-name">${nameValue}</div><div class="wish-item-text">${messageValue}</div>`;
         wishesArea.insertBefore(item, wishesArea.firstChild);
 
-        btnSubmit.textContent = "✓ Đã gửi lời chúc thành công!";
-        btnSubmit.style.background = "var(--gold)";
+        btnSubmit.textContent = "✓ Đã gửi lời chúc thành công!"; btnSubmit.style.background = "var(--gold)";
         
         setTimeout(() => {
-          btnSubmit.textContent = "Gửi lời chúc mừng";
-          btnSubmit.style.background = "var(--blue-deep)";
-          btnSubmit.style.pointerEvents = "auto";
-          btnSubmit.style.opacity = "1";
-          nameInput.value = "";
-          messageInput.value = "";
-          
+          btnSubmit.textContent = "Gửi lời chúc mừng"; btnSubmit.style.background = "var(--blue-deep)"; btnSubmit.style.pointerEvents = "auto"; btnSubmit.style.opacity = "1";
+          nameInput.value = ""; messageInput.value = "";
           setTimeout(fetchWishesFromExcel, 3000);
         }, 2000);
-        
         wishesArea.scrollTop = 0;
       }, 300);
     });
 
-    // Modals
+    // Modals điều khiển STK
     function openModal(person) {
       if(person === 'groom') document.getElementById('modalGroom').classList.add('show');
       else if(person === 'bride') document.getElementById('modalBride').classList.add('show');
