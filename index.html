@@ -21,85 +21,25 @@
 
   *{ margin:0; padding:0; box-sizing:border-box; }
   
-  html, body {
-    overflow-x: hidden;
-    height: 100%;
-  }
-  
-  body.invitation-opened {
-    height: auto;
-  }
+  html, body { overflow-x: hidden; height: 100%; }
+  body.invitation-opened { height: auto; }
+  body{ font-family:'Be Vietnam Pro', sans-serif; color:var(--ink); background:var(--cream); font-weight:300; letter-spacing:0.02em; }
+  h1,h2,h3,.serif{ font-family:'Playfair Display', serif; font-weight:500; }
 
-  body{
-    font-family:'Be Vietnam Pro', sans-serif;
-    color:var(--ink);
-    background:var(--cream);
-    font-weight:300;
-    letter-spacing:0.02em;
-  }
-
-  h1,h2,h3,.serif{
-    font-family:'Playfair Display', serif;
-    font-weight:500;
-  }
-
-  /* ---------- Reveal animation ---------- */
-  .reveal{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity 1s ease, transform 1s ease;
-  }
-  .reveal.visible{
-    opacity:1;
-    transform:translateY(0);
-  }
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 1s ease, transform 1s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
 
   /* ---------- HERO ---------- */
   .hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    padding:40px 24px;
-    background:
-      linear-gradient(to bottom,
-        rgba(250,245,238,0.84) 0%,
-        rgba(242,234,224,0.68) 40%,
-        rgba(242,234,224,0.68) 60%,
-        rgba(250,245,238,0.90) 100%),
-      url('img/VID06965.jpg') no-repeat center 30%;
-    background-size: cover;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding:40px 24px;
+    background: linear-gradient(to bottom, rgba(250,245,238,0.84) 0%, rgba(242,234,224,0.68) 40%, rgba(242,234,224,0.68) 60%, rgba(250,245,238,0.90) 100%), url('img/VID06965.jpg') no-repeat center 30%; background-size: cover;
   }
-
-  .hero::before, .hero::after{
-    content:'';
-    position:absolute;
-    border:1px solid rgba(139,111,94,0.28);
-    pointer-events:none;
-  }
+  .hero::before, .hero::after{ content:''; position:absolute; border:1px solid rgba(139,111,94,0.28); pointer-events:none; }
   .hero::before{ top:32px; left:32px; right:32px; bottom:32px; }
   .hero::after{ top:52px; left:52px; right:52px; bottom:52px; }
 
-  .petal{
-    position:absolute;
-    top:0;
-    pointer-events:none;
-    opacity:0;
-    color:var(--blue-dust);
-    font-family:'Playfair Display', serif;
-    animation: drift linear infinite;
-    will-change: transform, opacity;
-  }
-  #petals{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-  }
+  .petal{ position:absolute; top:0; pointer-events:none; opacity:0; color:var(--blue-dust); font-family:'Playfair Display', serif; animation: drift linear infinite; will-change: transform, opacity; }
+  #petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
   @keyframes drift{
     0%{ opacity:0; transform: translate(var(--x-start), 110vh) rotate(0deg) scale(var(--scale)); }
     10%{ opacity:0.55; }
@@ -107,536 +47,140 @@
     100%{ opacity:0; transform: translate(var(--x-end), -10vh) rotate(360deg) scale(var(--scale)); }
   }
 
-  .hero-glow{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    background: radial-gradient(ellipse at center, transparent 30%, rgba(250,245,238,0.60) 100%);
-  }
-
-  .monogram{
-    width:120px;
-    height:120px;
-    border:1px solid var(--blue-deep);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:32px;
-    position:relative;
-    animation: fadeScale 1.4s ease forwards;
-    opacity:0;
-  }
-  .monogram::before{
-    content:'';
-    position:absolute;
-    inset:10px;
-    border:1px solid var(--blue-dust);
-    border-radius:50%;
-  }
-  .monogram::after{
-    content:'';
-    position:absolute;
-    inset:-10px;
-    border:1px dashed var(--blue-dust);
-    border-radius:50%;
-    opacity:0.5;
-    animation: spinSlow 40s linear infinite;
-  }
-  .monogram span{
-    font-family:'Playfair Display', serif;
-    font-size:2.6rem;
-    font-style:italic;
-    color:var(--blue-deep);
-    letter-spacing:0.05em;
-    position:relative;
-    z-index:1;
-  }
+  .monogram{ width:120px; height:120px; border:1px solid var(--blue-deep); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:32px; position:relative; animation: fadeScale 1.4s ease forwards; opacity:0; }
+  .monogram::before{ content:''; position:absolute; inset:10px; border:1px solid var(--blue-dust); border-radius:50%; }
+  .monogram::after{ content:''; position:absolute; inset:-10px; border:1px dashed var(--blue-dust); border-radius:50%; opacity:0.5; animation: spinSlow 40s linear infinite; }
+  .monogram span{ font-family:'Playfair Display', serif; font-size:2.6rem; font-style:italic; color:var(--blue-deep); letter-spacing:0.05em; position:relative; z-index:1; }
   @keyframes spinSlow{ to{ transform: rotate(360deg); } }
 
-  .eyebrow{
-    font-size:0.78rem;
-    letter-spacing:0.35em;
-    text-transform:uppercase;
-    color:var(--blue-deep);
-    margin-bottom:18px;
-    animation: fadeUp 1.2s ease 0.2s forwards;
-    opacity:0;
-  }
-
-  /* TO LÊN: Điều chỉnh font-size cho tên CDCR ở trang đầu to ra nổi bật */
+  .eyebrow{ font-size:0.78rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:18px; animation: fadeUp 1.2s ease 0.2s forwards; opacity:0; }
   .hero h1{ font-size:clamp(3.2rem, 9vw, 6.5rem); line-height:1.15; color:var(--ink); }
   .hero h1 .name-line{ display:block; overflow:hidden; }
-  .hero h1 .name-line span{
-    display:inline-block;
-    opacity:0;
-    transform:translateY(110%);
-    animation: letterUp 0.9s cubic-bezier(.22,1,.36,1) forwards;
-  }
+  .hero h1 .name-line span{ display:inline-block; opacity:0; transform:translateY(110%); animation: letterUp 0.9s cubic-bezier(.22,1,.36,1) forwards; }
   @keyframes letterUp{ to{ opacity:1; transform:translateY(0); } }
+  .hero h1 .amp{ display:block; font-style:italic; color:var(--blue-deep); font-size:0.55em; margin:4px 0; opacity:0; animation: fadeUp 0.9s ease 0.55s forwards; }
 
-  .hero h1 .amp{
-    display:block;
-    font-style:italic;
-    color:var(--blue-deep);
-    font-size:0.55em;
-    margin:4px 0;
-    opacity:0;
-    animation: fadeUp 0.9s ease 0.55s forwards;
-  }
-
-  .hero .date{
-    margin-top:28px;
-    font-size:1.05rem;
-    letter-spacing:0.25em;
-    text-transform:uppercase;
-    color:var(--ink);
-    animation: fadeUp 1.2s ease 0.6s forwards;
-    opacity:0;
-  }
+  .hero .date{ margin-top:28px; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink); animation: fadeUp 1.2s ease 0.6s forwards; opacity:0; }
   .hero .date::before, .hero .date::after{ content:'—'; color:var(--gold); margin:0 14px; }
 
-  .scroll-cue{
-    position:absolute;
-    bottom:48px;
-    font-size:0.7rem;
-    letter-spacing:0.3em;
-    text-transform:uppercase;
-    color:var(--blue-deep);
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-  }
-  .scroll-cue.show{
-    display:flex;
-    animation: fadeUp 1.2s ease forwards;
-  }
-  .scroll-cue .line{
-    width:1px; height:36px;
-    background:var(--blue-deep);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
+  .scroll-cue{ position:absolute; bottom:48px; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blue-deep); display:none; flex-direction:column; align-items:center; gap:10px; }
+  .scroll-cue.show{ display:flex; animation: fadeUp 1.2s ease forwards; }
+  .scroll-cue .line{ width:1px; height:36px; background:var(--blue-deep); animation: scrollLine 2s ease-in-out infinite; }
 
-  @keyframes fadeUp{
-    from{ opacity:0; transform:translateY(16px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  @keyframes fadeScale{
-    from{ opacity:0; transform:scale(0.8); }
-    to{ opacity:1; transform:scale(1); }
-  }
-  @keyframes scrollLine{
-    0%{ transform:scaleY(0); transform-origin:top; opacity:0;}
-    50%{ transform:scaleY(1); transform-origin:top; opacity:1;}
-    51%{ transform-origin:bottom; }
-    100%{ transform:scaleY(0); transform-origin:bottom; opacity:0;}
-  }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes fadeScale{ from{ opacity:0; transform:scale(0.8); } to{ opacity:1; transform:scale(1); } }
+  @keyframes scrollLine{ 0%{ transform:scaleY(0); transform-origin:top; opacity:0;} 50%{ transform:scaleY(1); transform-origin:top; opacity:1;} 51%{ transform-origin:bottom; } 100%{ transform:scaleY(0); transform-origin:bottom; opacity:0;} }
 
   /* ---------- SECTION SHARED ---------- */
-  section{
-    padding:120px 24px;
-    max-width:880px;
-    margin:0 auto;
-  }
+  section{ padding:120px 24px; max-width:880px; margin:0 auto; }
   .section-head{ text-align:center; margin-bottom:64px; }
   .section-head .eyebrow{ opacity:1; animation:none; }
   .section-head h2{ font-size:clamp(2rem, 5vw, 3.2rem); margin-top:6px; }
-  .divider{
-    width:60px; height:1px;
-    background:var(--gold);
-    margin:24px auto 0;
-    position:relative;
-    overflow:hidden;
-  }
-  .divider::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:var(--blue-deep);
-    transform:scaleX(0);
-    transform-origin:left;
-    transition: transform 1s cubic-bezier(.22,1,.36,1) 0.3s;
-  }
+  .divider{ width:60px; height:1px; background:var(--gold); margin:24px auto 0; position:relative; overflow:hidden; }
+  .divider::after{ content:''; position:absolute; inset:0; background:var(--blue-deep); transform:scaleX(0); transform-origin:left; transition: transform 1s cubic-bezier(.22,1,.36,1) 0.3s; }
   .reveal.visible .divider::after{ transform:scaleX(1); }
 
-  /* ---------- MESSAGE ---------- */
-  .message-verse{
-    text-align:center;
-    padding:40px 36px;
-    margin-bottom:40px;
-    position:relative;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-  }
-  .message-verse::before, .message-verse::after{
-    content:'✦';
-    position:absolute;
-    color:var(--gold);
-    font-size:0.9rem;
-    left:50%;
-    transform:translateX(-50%);
-  }
+  /* ---------- LỜI NGỎ (BẢN TIẾNG ANH) ---------- */
+  .message-verse{ text-align:center; padding:40px 36px; margin-bottom:40px; position:relative; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .message-verse::before, .message-verse::after{ content:'✦'; position:absolute; color:var(--gold); font-size:0.9rem; left:50%; transform:translateX(-50%); }
   .message-verse::before{ top:-10px; background:var(--cream); padding:0 12px; }
   .message-verse::after{ bottom:-10px; background:var(--cream); padding:0 12px; }
-
-  .verse-ref{
-    display:block;
-    font-family:'Be Vietnam Pro', sans-serif;
-    font-style:normal;
-    font-size:0.68rem;
-    letter-spacing:0.4em;
-    text-transform:uppercase;
-    color:var(--blue-deep);
-    margin-bottom:20px;
-    opacity:0.85;
-  }
-  .verse-text{
-    font-family:'EB Garamond', serif;
-    font-style:italic;
-    font-size:clamp(1rem, 2vw, 1.25rem);
-    line-height:2;
-    color:var(--ink);
-    opacity:0.82;
-  }
-  .message-body{
-    text-align:center;
-    font-family:'Playfair Display', serif;
-    font-size:clamp(1.15rem, 2.2vw, 1.5rem);
-    line-height:2;
-    color:var(--ink);
-  }
+  .verse-ref{ display:block; font-family:'Be Vietnam Pro', sans-serif; font-style:normal; font-size:0.68rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:20px; opacity:0.85; }
+  .verse-text{ font-family:'EB Garamond', serif; font-style:italic; font-size:clamp(1.05rem, 2.2vw, 1.35rem); line-height:1.8; color:var(--ink); opacity:0.85; max-width: 700px; margin: 0 auto; }
+  
+  .message-body{ text-align:center; font-family:'Playfair Display', serif; font-size:clamp(1.15rem, 2.2vw, 1.5rem); line-height:2; color:var(--ink); }
   .message-body .highlight{ font-style:italic; color:var(--blue-deep); }
-  .message-body .note{
-    display:block;
-    margin-top:28px;
-    font-family:'Be Vietnam Pro', sans-serif;
-    font-size:clamp(0.85rem, 1.5vw, 0.95rem);
-    font-style:normal;
-    font-weight:300;
-    line-height:1.9;
-    letter-spacing:0.03em;
-    color:var(--ink);
-    opacity:0.75;
-  }
+  .message-body .note{ display:block; margin-top:28px; font-family:'Be Vietnam Pro', sans-serif; font-size:clamp(0.85rem, 1.5vw, 0.95rem); font-style:normal; font-weight:300; line-height:1.9; letter-spacing:0.03em; color:var(--ink); opacity:0.75; }
 
-  /* ---------- COUPLE ---------- */
-  .couple-grid{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    gap:40px;
-    align-items:start;
-    text-align:center;
-  }
-  .couple-grid .person {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .couple-grid .person .role{
-    font-size:0.72rem;
-    letter-spacing:0.3em;
-    text-transform:uppercase;
-    color:var(--blue-deep);
-    margin-bottom:10px;
-  }
-  .portrait{
-    width:160px;
-    aspect-ratio:3/4;
-    margin:0 auto 20px;
-    border-radius:6px;
-    overflow:hidden;
-    border:1px solid var(--line);
-    box-shadow: 0 14px 30px -12px rgba(139,111,94,0.28);
-    transition: transform 0.5s cubic-bezier(.22,1,.36,1), box-shadow 0.5s ease;
-  }
+  /* ---------- COUPLE & MODAL ---------- */
+  .couple-grid{ display:grid; grid-template-columns:1fr auto 1fr; gap:40px; align-items:start; text-align:center; }
+  .couple-grid .person { display: flex; flex-direction: column; align-items: center; }
+  .couple-grid .person .role{ font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:10px; }
+  .portrait{ width:160px; aspect-ratio:3/4; margin:0 auto 20px; border-radius:6px; overflow:hidden; border:1px solid var(--line); box-shadow: 0 14px 30px -12px rgba(139,111,94,0.28); transition: transform 0.5s cubic-bezier(.22,1,.36,1), box-shadow 0.5s ease; }
   .portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
   .reveal.visible .portrait{ animation: fadeScale 0.9s cubic-bezier(.22,1,.36,1) 0.15s both; }
-  .portrait:hover{
-    transform:translateY(-4px) scale(1.03);
-    box-shadow: 0 20px 40px -12px rgba(139,111,94,0.38);
-  }
+  .portrait:hover{ transform:translateY(-4px) scale(1.03); box-shadow: 0 20px 40px -12px rgba(139,111,94,0.38); }
   @media(max-width:560px){ .portrait{ width:140px; } }
-
-  /* TO LÊN: Phóng to font tên CDCR ở phần giới thiệu */
-  .couple-grid .person .name{ 
-    font-size:clamp(1.9rem, 4.5vw, 2.8rem); 
-    margin-bottom: 12px;
-  }
+  .couple-grid .person .name{ font-size:clamp(1.9rem, 4.5vw, 2.8rem); margin-bottom: 12px; }
   
-  .action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 220px;
-    margin-top: 6px;
-  }
-
-  .zalo-btn, .gift-trigger-btn{
-    display:block;
-    width: 100%;
-    padding:11px 20px;
-    border:1px solid var(--blue-deep);
-    border-radius:999px;
-    color:var(--blue-deep);
-    font-size:0.72rem;
-    letter-spacing:0.15em;
-    text-transform:uppercase;
-    text-decoration:none;
-    background: transparent;
-    cursor: pointer;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    transition: background 0.35s ease, color 0.35s ease, transform 0.3s ease, border-color 0.35s ease;
-  }
+  .action-buttons { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 220px; margin-top: 6px; }
+  .zalo-btn, .gift-trigger-btn{ display:block; width: 100%; padding:11px 20px; border:1px solid var(--blue-deep); border-radius:999px; color:var(--blue-deep); font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; background: transparent; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: background 0.35s ease, color 0.35s ease, transform 0.3s ease, border-color 0.35s ease; }
   .zalo-btn:hover{ background:var(--blue-deep); color:var(--cream); transform:translateY(-2px); }
-  
-  /* Nút kích hoạt mở hộp quà hỷ độc quyền */
-  .gift-trigger-btn {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  .gift-trigger-btn:hover {
-    background: var(--gold);
-    color: white;
-    transform: translateY(-2px);
-  }
+  .gift-trigger-btn { border-color: var(--gold); color: var(--gold); }
+  .gift-trigger-btn:hover { background: var(--gold); color: white; transform: translateY(-2px); }
+  .couple-grid .amp-mid{ font-family:'Playfair Display', serif; font-style:italic; font-size:2.5rem; color:var(--gold); align-self: center; margin-top: 70px; }
+  @media(max-width:560px){ .couple-grid{ grid-template-columns:1fr; gap:36px; } .couple-grid .amp-mid{ margin-top: 0; font-size:1.8rem; } }
 
-  .couple-grid .amp-mid{
-    font-family:'Playfair Display', serif;
-    font-style:italic;
-    font-size:2.5rem;
-    color:var(--gold);
-    align-self: center;
-    margin-top: 70px;
-  }
-  @media(max-width:560px){
-    .couple-grid{ grid-template-columns:1fr; gap:36px; }
-    .couple-grid .amp-mid{ margin-top: 0; font-size:1.8rem; }
-  }
-
-  /* ---------- MODAL (Cửa sổ bật lên chứa STK) ---------- */
-  .gift-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: rgba(44, 32, 24, 0.4);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-  .gift-modal.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .modal-content {
-    background: var(--cream);
-    border: 1px solid var(--blue-dust);
-    border-radius: 12px;
-    width: 100%;
-    max-width: 420px;
-    padding: 40px 30px 35px;
-    position: relative;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(44, 32, 24, 0.15);
-    transform: translateY(20px) scale(0.95);
-    transition: transform 0.4s cubic-bezier(.22,1,.36,1);
-  }
-  .gift-modal.show .modal-content {
-    transform: translateY(0) scale(1);
-  }
-  .close-modal {
-    position: absolute;
-    top: 16px; right: 20px;
-    background: none; border: none;
-    font-size: 1.5rem; color: var(--blue-deep);
-    cursor: pointer; opacity: 0.6;
-    transition: opacity 0.2s;
-  }
+  .gift-modal { position: fixed; inset: 0; z-index: 100; background: rgba(44, 32, 24, 0.4); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .gift-modal.show { opacity: 1; pointer-events: auto; }
+  .modal-content { background: var(--cream); border: 1px solid var(--blue-dust); border-radius: 12px; width: 100%; max-width: 420px; padding: 40px 30px 35px; position: relative; text-align: center; box-shadow: 0 20px 50px rgba(44, 32, 24, 0.15); transform: translateY(20px) scale(0.95); transition: transform 0.4s cubic-bezier(.22,1,.36,1); }
+  .gift-modal.show .modal-content { transform: translateY(0) scale(1); }
+  .close-modal { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color: var(--blue-deep); cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
   .close-modal:hover { opacity: 1; }
 
-  .gift-card{
-    background:var(--cream-soft);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:30px 24px;
-    margin-top: 20px;
-  }
+  .gift-card{ background:var(--cream-soft); border:1px solid var(--line); border-radius:8px; padding:30px 24px; margin-top: 20px; }
   .gift-who{ font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:6px; }
   .gift-name{ font-size:1.3rem; margin-bottom:20px; }
-  .bank-logo{
-    width:52px; height:52px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    margin:0 auto 14px;
-    font-family:'Be Vietnam Pro',sans-serif;
-    font-weight:600; font-size:0.8rem; letter-spacing:0.05em;
-  }
+  .bank-logo{ width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'Be Vietnam Pro',sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.05em; }
   .bank-logo.acb{ background:#003087; color:#fff; }
   .bank-logo.vcb{ background:#006B3C; color:#fff; }
   .gift-bank{ font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:12px; }
   .gift-stk{ font-family:'Playfair Display',serif; font-size:1.8rem; letter-spacing:0.1em; color:var(--ink); margin-bottom:4px; }
   .gift-holder{ font-size:0.72rem; letter-spacing:0.18em; color:var(--ink); opacity:0.6; margin-bottom:20px; }
-  
-  .copy-btn{
-    padding:10px 24px;
-    border:1px solid var(--blue-deep);
-    border-radius:999px;
-    background:transparent;
-    color:var(--blue-deep);
-    font-family:'Be Vietnam Pro',sans-serif;
-    font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase;
-    cursor:pointer;
-    width: 100%;
-    transition:background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  }
+  .copy-btn{ padding:10px 24px; border:1px solid var(--blue-deep); border-radius:999px; background:transparent; color:var(--blue-deep); font-family:'Be Vietnam Pro',sans-serif; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; width: 100%; transition:background 0.3s ease, color 0.3s ease, transform 0.2s ease; }
   .copy-btn:hover{ background:var(--blue-deep); color:var(--cream); }
   .copy-btn.copied{ background:var(--gold); border-color:var(--gold); color:#fff; }
 
-  /* ---------- GALLERY ---------- */
-  .gallery{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:14px;
-    perspective:1000px;
-  }
-  .gallery .ph{
-    aspect-ratio:3/4;
-    border-radius:4px;
-    background:linear-gradient(135deg, var(--blue-dust), var(--cream-soft));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:rgba(139,111,94,0.48);
-    font-size:0.75rem;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    text-align:center;
-    padding:12px;
-    position:relative;
-    overflow:hidden;
-    opacity:0;
-    transform:translateY(40px) scale(0.96);
-    transition: transform 0.6s cubic-bezier(.22,1,.36,1), box-shadow 0.4s ease, opacity 0.8s ease;
-    box-shadow: 0 0px 0px rgba(44,32,24,0);
-  }
-  .gallery.visible .ph{ opacity:1; transform:translateY(0) scale(1); }
-  .gallery .ph:nth-child(1){ transition-delay:0.05s; }
-  .gallery .ph:nth-child(2){ transition-delay:0.15s; }
-  .gallery .ph:nth-child(3){ transition-delay:0.25s; }
-  .gallery .ph:nth-child(4){ transition-delay:0.1s; }
-  .gallery .ph:nth-child(5){ transition-delay:0.2s; }
-  .gallery .ph:nth-child(6){ transition-delay:0.3s; }
-  .gallery .ph:hover{
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 20px 40px -10px rgba(139,111,94,0.28);
-    z-index:2;
-  }
-  .gallery .ph img{
-    width:100%; height:100%; object-fit:cover; display:block;
-    transition: transform 0.8s cubic-bezier(.22,1,.36,1), filter 0.5s ease;
-    filter: saturate(0.92);
-  }
-  .gallery .ph:hover img{ transform: scale(1.08); filter: saturate(1.05); }
-  .gallery .ph::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(160deg, rgba(255,255,255,0.18), transparent 60%);
-    pointer-events:none; opacity:0;
-    transition:opacity 0.4s ease;
-  }
-  .gallery .ph:hover::after{ opacity:1; }
-  .gallery.visible .ph:nth-child(2){ transform:translateY(24px) scale(1); }
-  .gallery.visible .ph:nth-child(2):hover{ transform:translateY(18px) scale(1.02); }
-  .gallery.visible .ph:nth-child(4){ transform:translateY(-12px) scale(1); }
-  .gallery.visible .ph:nth-child(4):hover{ transform:translateY(-18px) scale(1.02); }
-  .gallery.visible .ph:nth-child(5){ transform:translateY(12px) scale(1); }
-  .gallery.visible .ph:nth-child(5):hover{ transform:translateY(6px) scale(1.02); }
+  /* ---------- ALBUM ẢNH (LOOP SLIDER) ---------- */
+  .gallery-section { max-width: 100% !important; padding: 120px 0 !important; overflow: hidden; position: relative; }
+  .slider-container { width: 100%; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; padding: 20px 0; }
+  .slider-container::-webkit-scrollbar { display: none; }
+  .slider-track { display: flex; gap: 20px; padding: 0 40px; }
+  .slider-item { flex: 0 0 280px; width: 280px; aspect-ratio: 3/4; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--cream-soft); box-shadow: 0 10px 25px -10px rgba(139,111,94,0.15); transition: transform 0.4s ease; scroll-snap-align: center; }
+  .slider-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.95); transition: transform 0.6s ease; pointer-events: none; }
+  .slider-item:hover img { transform: scale(1.06); }
+  @media(max-width: 640px) { .slider-item { flex: 0 0 240px; width: 240px; } }
 
-  .gallery-dots{ display:none; justify-content:center; gap:8px; margin-top:20px; }
-  .gallery-dots .dot{
-    width:6px; height:6px; border-radius:50%;
-    background:var(--line);
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  .gallery-dots .dot.active{ background:var(--blue-deep); transform:scale(1.4); }
-
-  @media(max-width:640px){
-    .gallery{
-      display:flex; overflow-x:auto; overflow-y:hidden;
-      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-      gap:0; margin:0 -24px; padding:0 24px;
-      perspective:none; scrollbar-width:none;
-    }
-    .gallery::-webkit-scrollbar{ display:none; }
-    .gallery .ph{
-      flex:0 0 100%; width:100%; aspect-ratio:3/4;
-      scroll-snap-align:center; border-radius:8px;
-      transform:translateY(0) scale(1) !important;
-      opacity:1 !important; transition:none;
-    }
-    .gallery .ph + .ph{ margin-left:14px; }
-    .gallery .ph:hover{ transform:none; box-shadow:none; }
-    .gallery .ph:hover img{ transform:none; }
-    .gallery-dots{ display:flex; }
-  }
+  /* ---------- LỜI CHÚC (WISHBOOK) ---------- */
+  .wish-container { max-width: 600px; margin: 0 auto; background: var(--cream-soft); border: 1px solid var(--line); border-radius: 12px; padding: 40px 30px; box-shadow: 0 10px 30px rgba(139,111,94,0.05); }
+  .wish-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+  .form-group label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--blue-deep); font-weight: 500; }
+  .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid rgba(139,111,94,0.4); background: var(--cream); border-radius: 6px; font-family: inherit; font-size: 0.9rem; color: var(--ink); outline: none; transition: border-color 0.3s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--blue-deep); }
+  .submit-wish-btn { background: var(--blue-deep); color: var(--cream); border: none; padding: 14px; border-radius: 999px; font-family: inherit; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 10px; }
+  .submit-wish-btn:hover { background: var(--ink); transform: translateY(-1px); }
+  
+  .wishes-display-area { margin-top: 48px; max-height: 280px; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 16px; scrollbar-width: thin; }
+  .wishes-display-area::-webkit-scrollbar { width: 4px; }
+  .wishes-display-area::-webkit-scrollbar-thumb { background: var(--blue-dust); border-radius: 2px; }
+  .wish-item { background: var(--cream); border-left: 2px solid var(--gold); padding: 16px; border-radius: 0 8px 8px 0; text-align: left; animation: fadeInItem 0.5s ease both; }
+  .wish-item-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--blue-deep); margin-bottom: 4px; }
+  .wish-item-text { font-size: 0.88rem; line-height: 1.6; color: var(--ink); opacity: 0.85; }
+  @keyframes fadeInItem { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ---------- FOOTER ---------- */
-  footer{
-    text-align:center;
-    padding:80px 24px 64px;
-    background: linear-gradient(to bottom, var(--cream), var(--cream-soft));
-    border-top:1px solid var(--line);
-  }
+  footer{ text-align:center; padding:80px 24px 64px; background: linear-gradient(to bottom, var(--cream), var(--cream-soft)); border-top:1px solid var(--line); }
   footer .monogram{ width:64px; height:64px; margin:0 auto 24px; animation:none; opacity:1; }
   footer .monogram span{ font-size:1.4rem; }
   .footer-date{ font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:48px; }
   .footer-message{ max-width:480px; margin:0 auto 48px; display:flex; flex-direction:column; gap:28px; }
-  .footer-thanks{ font-family:'Be Vietnam Pro', sans-serif; font-size:0.9rem; font-weight:300; line-height:1.9; letter-spacing:0.04em; color:var(--ink); opacity:0.65; }
+  .footer-thanks{ font-family:'Be Vietnam Pro', sans-serif; font-size:0.95rem; font-weight:300; line-height:1.9; letter-spacing:0.04em; color:var(--ink); opacity:0.8; }
   .footer-wish{ font-family:'EB Garamond', serif; font-style:italic; font-size:1.15rem; line-height:1.9; color:var(--ink); opacity:0.8; }
   .footer-promise{ font-family:'Playfair Display', serif; font-size:1.1rem; line-height:1.9; color:var(--ink); }
   .footer-promise em{ color:var(--blue-deep); font-style:italic; }
-  .footer-sig{
-    font-family:'Playfair Display', serif;
-    font-style:italic;
-    font-size:1.3rem;
-    color:var(--blue-deep);
-    letter-spacing:0.05em;
-    padding-top:36px;
-    border-top:1px solid var(--line);
-    max-width:200px;
-    margin:0 auto;
-  }
+  .footer-sig{ font-family:'Playfair Display', serif; font-style:italic; font-size:1.3rem; color:var(--blue-deep); letter-spacing:0.05em; padding-top:36px; border-top:1px solid var(--line); max-width:200px; margin:0 auto; }
 
-  #heroOverlay{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    z-index:20;background:rgba(250,245,238,.15);backdrop-filter:blur(2px);
-    transition:opacity .8s ease, transform 0.8s ease;
-  }
+  #heroOverlay{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center; z-index:20;background:rgba(250,245,238,.15);backdrop-filter:blur(2px); transition:opacity .8s ease, transform 0.8s ease; }
   #heroOverlay.hide{opacity:0;pointer-events:none;transform:translateY(-20px);}
-
-  #enterInvitation{
-    border:none;background:rgba(255,255,255,.90);
-    padding:16px 36px;border-radius:999px;color:var(--blue-deep);
-    font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;cursor:pointer;
-    font-weight: 400; letter-spacing: 0.05em;
-    box-shadow:0 10px 30px rgba(139,111,94,0.2);transition:transform .25s ease, background-color .25s ease;
-  }
+  #enterInvitation{ border:none;background:rgba(255,255,255,.90); padding:16px 36px;border-radius:999px;color:var(--blue-deep); font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;cursor:pointer; font-weight: 400; letter-spacing: 0.05em; box-shadow:0 10px 30px rgba(139,111,94,0.2);transition:transform .25s ease, background-color .25s ease; }
   #enterInvitation:hover{transform:translateY(-2px); background:#fff;}
 
-  #mainContent {
-    display: none;
-  }
+  #mainContent { display: none; }
 
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
-    .reveal{ opacity:1; transform:none; }
-    .hero h1 .name-line span{ opacity:1; transform:none; }
-    .petal{ display:none; }
-    .gallery .ph{ opacity:1; transform:none !important; }
+    .reveal{ opacity:1; transform:none; } .hero h1 .name-line span{ opacity:1; transform:none; } .petal{ display:none; }
   }
 </style>
 </head>
@@ -644,11 +188,11 @@
 
 <audio id="bgMusic" src="Quiet Room.mp3" loop></audio>
 
+  <!-- HERO -->
   <section class="hero" id="hero" style="min-height:100vh; padding-top:0;">
     <div id="heroOverlay">
-      <button id="enterInvitation">🤍 Chạm để mở thiệp</button>
+      <button id="enterInvitation">🤍 Chạm để mở thiệp báo hỷ</button>
     </div>
-
     <div class="hero-glow" id="heroGlow"></div>
     <div id="petals"></div>
     <div class="monogram"><span>H&amp;H</span></div>
@@ -659,14 +203,15 @@
       <span class="name-line" id="line2"></span>
     </h1>
     <div class="date">20 . 6 . 2026</div>
-    
     <div class="scroll-cue" id="scrollCue">
       <span>Kéo xuống</span>
       <span class="line"></span>
     </div>
   </section>
 
+  <!-- NỘI DUNG CHÍNH -->
   <div id="mainContent">
+    <!-- MESSAGE (CẬP NHẬT BẢN DỊCH TIẾNG ANH ĐẸP NHẤT) -->
     <section class="reveal">
       <div class="section-head">
         <div class="eyebrow">Lời ngỏ</div>
@@ -674,15 +219,9 @@
         <div class="divider"></div>
       </div>
       <div class="message-verse">
-        <span class="verse-ref">I Cr 13, 4–8</span>
+        <span class="verse-ref">1 Corinthians 13:4–8</span>
         <p class="verse-text">
-          "Tình yêu thì nhẫn nhục, hiền hậu, không ghen tương,<br>
-          không vênh vang, không tự đắc, không làm điều bất chính,<br>
-          không tìm tư lợi, không nóng giận, không nuôi hận thù,<br>
-          không mừng khi thấy sự gian ác, nhưng vui khi thấy điều chân thật.<br>
-          Tình yêu tha thứ tất cả, tin tưởng tất cả,<br>
-          hy vọng tất cả, chịu đựng tất cả.<br>
-          Tình yêu không bao giờ mất đi."
+          "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs. Love does not delight in evil but rejoices with the truth. It always protects, always trusts, always hopes, always perseveres. Love never fails."
         </p>
       </div>
       <p class="message-body">
@@ -698,6 +237,7 @@
       </p>
     </section>
 
+    <!-- COUPLE -->
     <section class="reveal">
       <div class="section-head">
         <div class="eyebrow">Cô dâu &amp; Chú rể</div>
@@ -714,9 +254,7 @@
             <button class="gift-trigger-btn" onclick="openModal('groom')">Quà hỷ mừng chú rể</button>
           </div>
         </div>
-        
         <div class="amp-mid">&amp;</div>
-        
         <div class="person">
           <div class="portrait"><img src="img/bride.jpg" alt="Cô dâu Vũ Thanh Huyền"></div>
           <div class="role">Cô dâu</div>
@@ -729,30 +267,66 @@
       </div>
     </section>
 
-    <section class="reveal">
+    <!-- GALLERY (ĐÃ THÊM ĐỦ 12 ẢNH VÀ CHUYỂN THÀNH LOOP SLIDER) -->
+    <section class="gallery-section reveal">
       <div class="section-head">
         <div class="eyebrow">Album</div>
         <h2>Khoảnh khắc của chúng tôi</h2>
         <div class="divider"></div>
       </div>
-      <div class="gallery">
-        <div class="ph"><img src="img/VID06567.jpg" alt="Ảnh cưới 1"></div>
-        <div class="ph"><img src="img/VID06337.jpg" alt="Ảnh cưới 2"></div>
-        <div class="ph"><img src="img/VID06968.jpg" alt="Ảnh cưới 3"></div>
-        <div class="ph"><img src="img/VID07110.jpg" alt="Ảnh cưới 4"></div>
-        <div class="ph"><img src="img/VID07602.jpg" alt="Ảnh cưới 5"></div>
-        <div class="ph"><img src="img/VID07686.jpg" alt="Ảnh cưới 6"></div>
+      <div class="slider-container" id="sliderContainer">
+        <div class="slider-track" id="sliderTrack">
+          <!-- 6 ảnh đầu -->
+          <div class="slider-item"><img src="img/VID06567.jpg" alt="Ảnh cưới 1"></div>
+          <div class="slider-item"><img src="img/VID06337.jpg" alt="Ảnh cưới 2"></div>
+          <div class="slider-item"><img src="img/VID06968.jpg" alt="Ảnh cưới 3"></div>
+          <div class="slider-item"><img src="img/VID07110.jpg" alt="Ảnh cưới 4"></div>
+          <div class="slider-item"><img src="img/VID07602.jpg" alt="Ảnh cưới 5"></div>
+          <div class="slider-item"><img src="img/VID07686.jpg" alt="Ảnh cưới 6"></div>
+          <!-- 6 ảnh mới thêm vào -->
+          <div class="slider-item"><img src="img/VID07523.jpg" alt="Ảnh cưới 7"></div>
+          <div class="slider-item"><img src="img/VID07617.jpg" alt="Ảnh cưới 8"></div>
+          <div class="slider-item"><img src="img/VID06889.jpg" alt="Ảnh cưới 9"></div>
+          <div class="slider-item"><img src="img/VID07183.jpg" alt="Ảnh cưới 10"></div>
+          <div class="slider-item"><img src="img/VID06582.jpg" alt="Ảnh cưới 11"></div>
+          <div class="slider-item"><img src="img/VID06180.jpg" alt="Ảnh cưới 12"></div>
+        </div>
       </div>
-      <div class="gallery-dots" id="galleryDots"></div>
     </section>
 
+    <!-- WISHBOOK (HỆ THỐNG LƯU LỜI CHÚC) -->
+    <section class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">Wishbook</div>
+        <h2>Gửi lời chúc phúc</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="wish-container">
+        <form class="wish-form" id="wishForm">
+          <div class="form-group">
+            <label for="guestName">Tên của bạn</label>
+            <input type="text" id="guestName" placeholder="Nhập tên của bạn..." required>
+          </div>
+          <div class="form-group">
+            <label for="guestMessage">Lời chúc mừng</label>
+            <textarea id="guestMessage" rows="4" placeholder="Nhập lời chúc ý nghĩa của bạn gửi tới cô dâu & chú rể..." required></textarea>
+          </div>
+          <button type="submit" class="submit-wish-btn">Gửi lời chúc mừng</button>
+        </form>
+        <div class="wishes-display-area" id="wishesArea">
+          <!-- LLời chúc sẽ tự động hiển thị ở đây từ LocalStorage -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (ĐÃ SỬA LỜI CẢM ƠN THÂN MẬT) -->
     <footer>
       <div class="monogram"><span>H&amp;H</span></div>
       <p class="footer-date">20 . 6 . 2026 — TP. Hồ Chí Minh</p>
       <div class="footer-message">
         <p class="footer-thanks">
-          Cảm ơn bạn đã dành chút thời gian<br>
-          ghé thăm trang nhỏ này của chúng tôi.
+          Cảm ơn bạn đã ghé chơi căn phòng nhỏ này,<br>
+          và cùng chúng tôi nâng niu những mảnh ghép hạnh phúc đầu tiên.
         </p>
         <p class="footer-wish">
           Dù bận rộn hay cách xa,<br>
@@ -769,6 +343,7 @@
     </footer>
   </div>
 
+  <!-- MODALS -->
   <div class="gift-modal" id="modalGroom" onclick="closeModalByOverlay(event, 'modalGroom')">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('modalGroom')">✕</button>
@@ -827,12 +402,11 @@
         scrollCue.classList.add('show');
 
         initIntersectionObserver();
+        initLoopSlider();
+        loadStoredWishes();
 
         setTimeout(() => {
-          window.scrollBy({
-            top: window.innerHeight * 0.3,
-            behavior: 'smooth'
-          });
+          window.scrollBy({ top: window.innerHeight * 0.3, behavior: 'smooth' });
         }, 300);
       });
     }
@@ -855,21 +429,9 @@
     const petalChars = ['❀','✦','·','❁'];
     const petalCount = window.innerWidth < 640 ? 8 : 14;
     for(let i=0;i<petalCount;i++){
-      const p = document.createElement('span');
-      p.className = 'petal';
-      p.textContent = petalChars[Math.floor(Math.random()*petalChars.length)];
-      const startX = Math.random()*100 + 'vw';
-      const endX = (Math.random()*100) + 'vw';
-      const scale = (0.5 + Math.random()*1.1).toFixed(2);
-      const duration = 18 + Math.random()*22;
-      const delay = -(Math.random()*duration);
-      p.style.setProperty('--x-start', startX);
-      p.style.setProperty('--x-end', endX);
-      p.style.setProperty('--scale', scale);
-      p.style.left = '0';
-      p.style.fontSize = (0.8 + Math.random()*1.4) + 'rem';
-      p.style.animationDuration = duration + 's';
-      p.style.animationDelay = delay + 's';
+      const p = document.createElement('span'); p.className = 'petal'; p.textContent = petalChars[Math.floor(Math.random()*petalChars.length)];
+      const startX = Math.random()*100 + 'vw'; const endX = (Math.random()*100) + 'vw'; const scale = (0.5 + Math.random()*1.1).toFixed(2); const duration = 18 + Math.random()*22; const delay = -(Math.random()*duration);
+      p.style.setProperty('--x-start', startX); p.style.setProperty('--x-end', endX); p.style.setProperty('--scale', scale); p.style.left = '0'; p.style.fontSize = (0.8 + Math.random()*1.4) + 'rem'; p.style.animationDuration = duration + 's'; p.style.animationDelay = delay + 's';
       petalContainer.appendChild(p);
     }
 
@@ -877,64 +439,99 @@
       const reveals = document.querySelectorAll('.reveal');
       const obs = new IntersectionObserver(entries=>{
         entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold:0.15 });
+      }, { threshold:0.12 });
       reveals.forEach(el=>obs.observe(el));
+    }
 
-      const gallery = document.querySelector('.gallery');
-      if(gallery){
-        const galleryObs = new IntersectionObserver(entries=>{
-          entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); galleryObs.disconnect(); } });
-        }, { threshold:0.1 });
-        galleryObs.observe(gallery);
+    // TÍNH NĂNG SLIDER LƯỚT VÒNG LẶP VÔ TẬN (INFINITE SCROLL SLIDER)
+    function initLoopSlider() {
+      const container = document.getElementById('sliderContainer');
+      const track = document.getElementById('sliderTrack');
+      const originalItems = Array.from(track.children);
+      
+      // Nhân bản chuỗi ảnh để tạo hiệu ứng nối đuôi vòng lặp vô tận mượt mà
+      originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
+      originalItems.forEach(item => { const clone = item.cloneNode(true); track.appendChild(clone); });
 
-        const dotsContainer = document.getElementById('galleryDots');
-        if (dotsContainer && dotsContainer.innerHTML === "") {
-          const photos = gallery.querySelectorAll('.ph');
-          photos.forEach((_,i)=>{
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (i===0 ? ' active' : '');
-            dotsContainer.appendChild(dot);
-          });
-          const dots = dotsContainer.querySelectorAll('.dot');
-          let scrollTimeout;
-          gallery.addEventListener('scroll', ()=>{
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(()=>{
-              const idx = Math.round(gallery.scrollLeft / gallery.clientWidth);
-              dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
-            }, 80);
-          });
+      // Định vị trí ban đầu ở giữa chuỗi ảnh nhân bản
+      const itemWidth = originalItems[0].offsetWidth + 20;
+      const totalOriginalWidth = itemWidth * originalItems.length;
+      container.scrollLeft = totalOriginalWidth;
+
+      // Xử lý sự kiện dịch chuyển vòng lặp tự động khi cuộn chạm biên
+      container.addEventListener('scroll', () => {
+        if (container.scrollLeft >= totalOriginalWidth * 2) {
+          container.scrollLeft -= totalOriginalWidth;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += totalOriginalWidth;
         }
-      }
+      });
+
+      // Hỗ trợ tính năng kéo chuột/vuốt màn hình thủ công mượt mà
+      let isDown = false, startX, scrollLeft;
+      container.addEventListener('mousedown', (e) => { isDown = true; container.style.cursor = 'grabbing'; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; });
+      container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
+      container.addEventListener('mouseup', () => { isDown = false; container.style.cursor = 'grab'; });
+      container.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 1.5; container.scrollLeft = scrollLeft - walk; });
     }
 
-    // Logic điều khiển Modal bật lên/ẩn đi tinh tế
+    // TÍNH NĂNG XỬ LÝ LỜI CHÚC (LOCAL STORAGE WISHBOOK)
+    const wishForm = document.getElementById('wishForm');
+    const wishesArea = document.getElementById('wishesArea');
+
+    function loadStoredWishes() {
+      const stored = localStorage.getItem('wedding_wishes');
+      const wishes = stored ? JSON.parse(stored) : [
+        { name: "Gia đình anh chị Đức", text: "Chúc mừng hạnh phúc hai em! Chúc hai em trăm năm tình viên mãn, bạc đầu nghĩa phu thê!" },
+        { name: "Bạn Minh Thảo", text: "Siêu vui khi nhận được thiệp báo hỷ của Huy và Huyền. Chúc hai bạn hành trình mới tràn ngập tiếng cười nhé!" }
+      ];
+      wishesArea.innerHTML = "";
+      wishes.forEach(w => appendWishDOM(w.name, w.text));
+    }
+
+    function appendWishDOM(name, text) {
+      const item = document.createElement('div');
+      item.className = 'wish-item';
+      item.innerHTML = `<div class="wish-item-name">${name}</div><div class="wish-item-text">${text}</div>`;
+      wishesArea.insertBefore(item, wishesArea.firstChild);
+    }
+
+    wishForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('guestName');
+      const messageInput = document.getElementById('guestMessage');
+      
+      const newWish = { name: nameInput.value.trim(), text: messageInput.value.trim() };
+      
+      // Lưu vào LocalStorage của thiết bị
+      const stored = localStorage.getItem('wedding_wishes');
+      const wishes = stored ? JSON.parse(stored) : [];
+      wishes.push(newWish);
+      localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+      
+      // Hiển thị trực tiếp lên giao diện ngay lập tức
+      appendWishDOM(newWish.name, newWish.text);
+      
+      // Reset form dữ liệu
+      nameInput.value = "";
+      messageInput.value = "";
+      wishesArea.scrollTop = 0;
+    });
+
+    // Quản lý Modal STK
     function openModal(person) {
-      if(person === 'groom') {
-        document.getElementById('modalGroom').classList.add('show');
-      } else if(person === 'bride') {
-        document.getElementById('modalBride').classList.add('show');
-      }
+      if(person === 'groom') document.getElementById('modalGroom').classList.add('show');
+      else if(person === 'bride') document.getElementById('modalBride').classList.add('show');
     }
-
-    function closeModal(modalId) {
-      document.getElementById(modalId).classList.remove('show');
-    }
-
-    function closeModalByOverlay(event, modalId) {
-      if(event.target.id === modalId) {
-        closeModal(modalId);
-      }
-    }
+    function closeModal(modalId) { document.getElementById(modalId).classList.remove('show'); }
+    function closeModalByOverlay(event, modalId) { if(event.target.id === modalId) closeModal(modalId); }
 
     function copySTK(btn, stk){
       navigator.clipboard.writeText(stk).then(()=>{
-        btn.textContent = '✓ Đã sao chép thành công!';
-        btn.classList.add('copied');
+        btn.textContent = '✓ Đã sao chép thành công!'; btn.classList.add('copied');
         setTimeout(()=>{ btn.textContent = 'Sao chép STK'; btn.classList.remove('copied'); }, 2000);
       });
     }
   </script>
-
 </body>
 </html>
